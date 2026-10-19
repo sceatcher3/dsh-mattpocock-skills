@@ -88,6 +88,28 @@ To remove it:
 plugin_manager action=remove_bundle target=dsh-mattpocock-skills-bundle
 ```
 
+### Install without npm
+
+A public repository can be installed from Git, with no registry account at all:
+
+```
+dsh plugin --profile web add git+https://github.com/sceatcher3/dsh-mattpocock-skills.git
+```
+
+Pin a tag for a reproducible version:
+
+```
+dsh plugin --profile web add git+https://github.com/sceatcher3/dsh-mattpocock-skills.git#v0.2.0
+```
+
+Or install a release tarball by URL:
+
+```
+dsh plugin --profile web add https://github.com/sceatcher3/dsh-mattpocock-skills/releases/download/v0.2.0/dsh-mattpocock-skills-bundle-0.2.0.tgz
+```
+
+Both paths need the repository to be reachable: public for everyone, or pnpm credentials configured for a private repository.
+
 ### Install from GitHub
 
 Once the repository is public:
