@@ -1,0 +1,51 @@
+{
+  "name": "dsh-mattpocock-skills",
+  "version": "0.1.0",
+  "description": "Matt Pocock's agent skills (mattpocock/skills) as a DeepSeek Harness bundle: grilling, spec and ticket flows, TDD, code review, domain modelling and more.",
+  "type": "module",
+  "main": "./index.js",
+  "exports": {
+    ".": "./index.js",
+    "./package.json": "./package.json",
+    "./cordis.patch.yml": "./cordis.patch.yml",
+    "./locale/*.json": "./locale/*.json",
+    "./icon": "./icon.svg",
+    "./skills/index.json": "./skills/index.json"
+  },
+  "icon": "./icon.svg",
+  "files": [
+    "index.js",
+    "cordis.patch.yml",
+    "icon.svg",
+    "locale/*.json",
+    "skills/**/*",
+    "README.md",
+    "LICENSE",
+    "NOTICE.md",
+    "tools/*.mjs"
+  ],
+  "scripts": {
+    "manifest": "node tools/build-manifest.mjs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sceatcher3/dsh-mattpocock-skills.git"
+  },
+  "homepage": "https://github.com/sceatcher3/dsh-mattpocock-skills#readme",
+  "bugs": {
+    "url": "https://github.com/sceatcher3/dsh-mattpocock-skills/issues"
+  },
+  "keywords": [
+    "dsh",
+    "deepseek-harness",
+    "skills",
+    "agent-skills",
+    "matt-pocock"
+  ],
+  "license": "MIT",
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    }
+  }
+}

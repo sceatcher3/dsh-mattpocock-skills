@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="Matt Pocock skills">
+  <rect width="128" height="128" rx="28" fill="#0B1220"/>
+  <rect x="13" y="13" width="102" height="102" rx="23" fill="#12203A" stroke="#38BDF8" stroke-opacity="0.28"/>
+  <path d="M47 45 31 64l16 19" fill="none" stroke="#38BDF8" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M81 45l16 19-16 19" fill="none" stroke="#38BDF8" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M70 40 58 88" fill="none" stroke="#F59E0B" stroke-width="7" stroke-linecap="round"/>
+  <circle cx="97" cy="31" r="6" fill="#22D3EE"/>
+</svg>

@@ -1,0 +1,5 @@
+# Inserts the Matt Pocock skills provider into this profile.
+- insert:
+    - id: dsh-mattpocock-skills
+      name: dsh-mattpocock-skills
+      config: {}
