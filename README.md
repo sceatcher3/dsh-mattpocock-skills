@@ -112,7 +112,7 @@ Both paths need the repository to be reachable: public for everyone, or pnpm cre
 
 ### Install from GitHub
 
-Once the repository is public:
+The repository is public:
 
 ```
 plugin_manager action=install_bundle target=git+https://github.com/sceatcher3/dsh-mattpocock-skills.git

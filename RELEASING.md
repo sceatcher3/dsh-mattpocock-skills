@@ -26,7 +26,7 @@ The plugin manager installs the package, selects its `dsh.bundle.patch`, and the
 git push origin main --tags
 ```
 
-The repository is currently private. Make it public before advertising the Git install path, or keep it private and rely on the npm package.
+The repository is public, so the Git and release-tarball install paths need no credentials.
 
 ## 4. Versioning
 
