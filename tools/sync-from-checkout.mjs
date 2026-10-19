@@ -135,7 +135,7 @@ for (const entry of entries) {
 }
 
 const manifest = {
-  name: 'dsh-mattpocock-skills',
+  name: JSON.parse(readFileSync(join(pkgRoot, 'package.json'), 'utf8')).name,
   upstream: {
     repo: 'https://github.com/mattpocock/skills',
     version: pluginJson.version,

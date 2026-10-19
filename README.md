@@ -1,4 +1,4 @@
-# dsh-mattpocock-skills
+# dsh-mattpocock-skills-bundle
 
 Matt Pocock's agent skills, packaged for [DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness).
 
@@ -60,7 +60,13 @@ Full descriptions live in each `skills/<bucket>/<name>/SKILL.md` frontmatter and
 With the plugin manager tool, point `install_bundle` at this directory:
 
 ```
-plugin_manager action=install_bundle target=<absolute path to dsh-mattpocock-skills>
+plugin_manager action=install_bundle target=<absolute path to dsh-mattpocock-skills-bundle>
+```
+
+After the first npm publish, it installs with the same command other plugins use:
+
+```
+dsh plugin --profile web add dsh-mattpocock-skills-bundle
 ```
 
 Or use the Web UI: Settings, Plugins, Add, then install from a local directory. The row appears as `dsh-mattpocock-skills`; enable it if the install leaves it off.
@@ -79,7 +85,7 @@ Offline verification against the real `@deepseek-ai/dsh-skill` registry passes: 
 To remove it:
 
 ```
-plugin_manager action=remove_bundle target=dsh-mattpocock-skills
+plugin_manager action=remove_bundle target=dsh-mattpocock-skills-bundle
 ```
 
 ### Install from GitHub
@@ -101,7 +107,7 @@ The plugin manager runs pnpm against the repository, so the Git URL must be reac
 ## Layout
 
 ```
-dsh-mattpocock-skills/
+dsh-mattpocock-skills-bundle/
   index.js                 provider registration
   cordis.patch.yml         bundle patch (one insert row)
   package.json             dsh.bundle.patch, exports, icon

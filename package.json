@@ -1,5 +1,5 @@
 {
-  "name": "dsh-mattpocock-skills",
+  "name": "dsh-mattpocock-skills-bundle",
   "version": "0.1.0",
   "description": "Matt Pocock's agent skills (mattpocock/skills) as a DeepSeek Harness bundle: grilling, spec and ticket flows, TDD, code review, domain modelling and more.",
   "type": "module",
@@ -47,5 +47,8 @@
     "bundle": {
       "patch": "./cordis.patch.yml"
     }
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }

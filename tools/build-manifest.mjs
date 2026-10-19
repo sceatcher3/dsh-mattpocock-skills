@@ -78,7 +78,7 @@ collected.sort((left, right) => {
 })
 
 const manifest = {
-  name: 'dsh-mattpocock-skills',
+  name: JSON.parse(readFileSync(join(root ?? here, 'package.json'), 'utf8')).name,
   upstream: previous?.upstream ?? {
     repo: 'https://github.com/mattpocock/skills',
     license: 'MIT',
