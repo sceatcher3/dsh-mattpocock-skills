@@ -34,6 +34,7 @@ function loadManifest() {
   for (const entry of skills) {
     if (typeof entry.name !== 'string' || !SKILL_NAME_RE.test(entry.name)) problems.push(`invalid name ${JSON.stringify(entry.name)}`)
     if (typeof entry.description !== 'string' || entry.description.trim() === '') problems.push(`${entry.name}: missing description`)
+    if (entry.descriptionZh !== undefined && (typeof entry.descriptionZh !== 'string' || entry.descriptionZh.trim() === '')) problems.push(`${entry.name}: invalid descriptionZh`)
     if (typeof entry.dir !== 'string' || entry.dir.split('/').length !== 2) problems.push(`${entry.name}: invalid dir ${JSON.stringify(entry.dir)}`)
     else if (!existsSync(join(skillsRoot, entry.dir, 'SKILL.md'))) problems.push(`${entry.name}: missing ${entry.dir}/SKILL.md`)
   }
@@ -53,11 +54,15 @@ function stripFrontmatter(text) {
   return end === -1 ? text : text.slice(end + 5)
 }
 
+function displayDescription(entry) {
+  return entry.descriptionZh ?? entry.description
+}
+
 function candidateFor(entry) {
   const dir = join(skillsRoot, entry.dir)
   return {
     name: entry.name,
-    description: entry.description,
+    description: displayDescription(entry),
     invocation: entry.invocation ?? { modelInvocable: true, userInvocable: true },
     source: SOURCE,
     provider: PROVIDER_NAME,
@@ -90,7 +95,7 @@ const provider = {
     const dir = join(skillsRoot, entry.dir)
     return {
       name: entry.name,
-      description: entry.description,
+      description: displayDescription(entry),
       ...(entry.whenToUse === undefined ? {} : { whenToUse: entry.whenToUse }),
       invocation: entry.invocation ?? { modelInvocable: true, userInvocable: true },
       source: SOURCE,

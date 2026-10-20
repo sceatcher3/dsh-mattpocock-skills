@@ -10,6 +10,7 @@ import { fileURLToPath } from 'node:url'
 const here = dirname(fileURLToPath(import.meta.url))
 const upstreamRoot = process.argv[2]
 const pkgRoot = process.argv[3] ?? join(here, '..')
+const i18nPath = join(pkgRoot, 'i18n', 'zh.json')
 if (upstreamRoot === undefined) {
   console.error('usage: node tools/sync-from-checkout.mjs <upstream-checkout> [package-root]')
   process.exit(2)
@@ -134,6 +135,31 @@ for (const entry of entries) {
   }
 }
 
+function loadDescriptions() {
+  let parsed
+  try {
+    parsed = JSON.parse(readFileSync(i18nPath, 'utf8'))
+  } catch (error) {
+    fail(`${i18nPath}: ${error instanceof Error ? error.message : String(error)}`)
+  }
+  const skills = parsed?.skills
+  if (skills === null || typeof skills !== 'object' || Array.isArray(skills)) fail(`${i18nPath}: "skills" must be an object keyed by skill name`)
+  return skills
+}
+
+function requireDescriptions(entries, descriptions) {
+  const names = new Set(entries.map((entry) => entry.name))
+  const missing = entries
+    .filter((entry) => typeof descriptions[entry.name] !== 'string' || descriptions[entry.name].trim() === '')
+    .map((entry) => entry.name)
+  const unknown = Object.keys(descriptions).filter((name) => !names.has(name))
+  if (missing.length > 0) fail(`${i18nPath}: missing Chinese description for: ${missing.join(', ')}`)
+  if (unknown.length > 0) fail(`${i18nPath}: entries for skills that do not ship: ${unknown.join(', ')}`)
+  return new Map(entries.map((entry) => [entry.name, descriptions[entry.name].trim()]))
+}
+
+const descriptions = requireDescriptions(entries, loadDescriptions())
+
 const manifest = {
   name: JSON.parse(readFileSync(join(pkgRoot, 'package.json'), 'utf8')).name,
   upstream: {
@@ -154,6 +180,7 @@ const manifest = {
     bucket: entry.bucket,
     dir: entry.dir,
     description: entry.description,
+    descriptionZh: descriptions.get(entry.name),
     invocation: { modelInvocable: true, userInvocable: true },
     upstreamModelInvocable: !entry.disableModelInvocation,
     ...(entry.argumentHint ? { argumentHint: entry.argumentHint } : {}),

@@ -1,0 +1,35 @@
+{
+  "meta": {
+    "language": "zh",
+    "note": "Chinese descriptions for the slash menu and the model skill catalog. SKILL.md frontmatter keeps the upstream English text."
+  },
+  "skills": {
+    "ask-matt": "不确定该用哪个技能或流程时先问它：本仓库技能的路由器，按你当前的处境挑出合适的技能。",
+    "diagnosing-bugs": "疑难 bug 与性能回归的诊断循环。用户说「diagnose」「debug this」，或报告东西坏了、失败、抛错、变慢时使用。",
+    "grill-with-docs": "用不留情面的访谈打磨方案或设计，并在过程中同步产出文档（ADR 与术语表）。",
+    "triage": "让 issue 和外部 PR 沿分诊角色的状态机流转：归类、核实、必要时追问，并写出可直接交给 agent 的简报。",
+    "improve-codebase-architecture": "扫描代码库寻找加深模块的机会，用可视化 HTML 报告呈现，再对选中的机会逐项追问打磨。",
+    "setup-matt-pocock-skills": "为本仓库配置工程技能所需的环境：建好 issue 跟踪器、分诊标签词表和领域文档布局。首次使用其他工程技能前运行一次。",
+    "tdd": "测试驱动开发。用户想先写测试再实现功能或修 bug、提到「red-green-refactor」，或需要集成测试时使用。",
+    "to-spec": "把当前对话整理成规格并发布到项目 issue 跟踪器：不再访谈，只综合已经讨论过的内容。",
+    "to-tickets": "把计划、规格或当前对话拆成一组曳光弹工单，每张声明自己的阻塞边，发布到已配置的跟踪器（本地每张工单一个文件、用文本写边；真实跟踪器用原生阻塞链接）。",
+    "wayfinder": "把超过单个 agent 会话容量的大块工作，规划成 issue 跟踪器上由决策工单组成的共享地图，逐个解决，直到通往目的地的路线清晰。",
+    "implement": "根据规格或一组工单实现一项工作。",
+    "implement-spec": "把 /to-spec 与 /to-tickets 的产物落成代码。",
+    "prototype": "构建一次性原型来回答设计问题。用户想验证状态模型或逻辑是否顺手，或探索界面该长什么样时使用。",
+    "research": "对照高可信的一手资料调查一个问题，把结论写成仓库里的 Markdown 文件。用户想调研某个主题、收集文档或 API 事实，或把阅读杂活交给后台 agent 时使用。",
+    "domain-modeling": "构建并打磨项目的领域模型。讨论代码库术语、编写或修改 GLOSSARY.md、记录或编辑 ADR 时使用。",
+    "codebase-design": "设计深模块的共享词汇。用户想设计或改进模块接口、寻找加深机会、决定接缝位置、让代码更易测试或更便于 AI 导航，或其他技能需要深模块词汇时使用。",
+    "code-review": "从固定点（commit、分支、tag 或 merge-base）起审查改动，分两条线：规范（代码是否遵循本仓库成文的编码规范？）与规格（代码是否符合原始 issue/规格的要求？）。两个审查在并行子 agent 中运行并并排汇报。用户想审查分支、PR、进行中的改动，或说「review since X」时使用。",
+    "pr": "编写 PR 正文时使用。",
+    "retro": "对一次编码会话做复盘。",
+    "wizard": "生成交互式 bash 向导，带人走完只有本人能做的步骤。配置基础设施、设置凭据或 CI 密钥、操作陌生的第三方控制台，或执行一次性迁移或切换时使用。agent 自己能做的步骤不要用它。",
+    "grill-me": "用穷追不舍的访谈打磨方案或设计。",
+    "grilling": "围绕计划、决策或想法对用户穷追猛问。用户想压力测试自己的思路，或说出带「grill」的触发语时使用。",
+    "handoff": "把当前对话压缩成交接文档，供另一个 agent 接手。",
+    "teach": "在本工作区内教用户一项新技能或新概念。",
+    "to-questionnaire": "把你无法完全回答的决策变成问卷，交给别人填写。",
+    "wait-what": "停。上一条没讲明白：换个说法重新讲。",
+    "writing-for-agents": "写给 agent 看的文档。创建或编辑技能，或修改 AGENTS.md、CLAUDE.md 时使用。"
+  }
+}

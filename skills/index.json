@@ -19,6 +19,7 @@
       "bucket": "engineering",
       "dir": "engineering/ask-matt",
       "description": "Ask which skill or flow fits your situation. A router over the skills in this repo.",
+      "descriptionZh": "不确定该用哪个技能或流程时先问它：本仓库技能的路由器，按你当前的处境挑出合适的技能。",
       "invocation": {
         "modelInvocable": true,
         "userInvocable": true
@@ -30,6 +31,7 @@
       "bucket": "engineering",
       "dir": "engineering/diagnosing-bugs",
       "description": "Diagnosis loop for hard bugs and performance regressions. Use when the user says \"diagnose\"/\"debug this\", or reports something broken/throwing/failing/slow.",
+      "descriptionZh": "疑难 bug 与性能回归的诊断循环。用户说「diagnose」「debug this」，或报告东西坏了、失败、抛错、变慢时使用。",
       "invocation": {
         "modelInvocable": true,
         "userInvocable": true
@@ -41,6 +43,7 @@
       "bucket": "engineering",
       "dir": "engineering/grill-with-docs",
       "description": "A relentless interview to sharpen a plan or design, which also creates docs (ADR's and glossary) as we go.",
+      "descriptionZh": "用不留情面的访谈打磨方案或设计，并在过程中同步产出文档（ADR 与术语表）。",
       "invocation": {
         "modelInvocable": true,
         "userInvocable": true
@@ -52,6 +55,7 @@
       "bucket": "engineering",
       "dir": "engineering/triage",
       "description": "Move issues and external PRs through a state machine of triage roles, categorise, verify, grill if needed, and write agent-ready briefs.",
+      "descriptionZh": "让 issue 和外部 PR 沿分诊角色的状态机流转：归类、核实、必要时追问，并写出可直接交给 agent 的简报。",
       "invocation": {
         "modelInvocable": true,
         "userInvocable": true
@@ -63,6 +67,7 @@
       "bucket": "engineering",
       "dir": "engineering/improve-codebase-architecture",
       "description": "Scan a codebase for deepening opportunities, present them as a visual HTML report, then grill through whichever one you pick.",
+      "descriptionZh": "扫描代码库寻找加深模块的机会，用可视化 HTML 报告呈现，再对选中的机会逐项追问打磨。",
       "invocation": {
         "modelInvocable": true,
         "userInvocable": true
@@ -74,6 +79,7 @@
       "bucket": "engineering",
       "dir": "engineering/setup-matt-pocock-skills",
       "description": "Configure this repo for the engineering skills: set up its issue tracker, triage label vocabulary, and domain doc layout. Run once before first use of the other engineering skills.",
+      "descriptionZh": "为本仓库配置工程技能所需的环境：建好 issue 跟踪器、分诊标签词表和领域文档布局。首次使用其他工程技能前运行一次。",
       "invocation": {
         "modelInvocable": true,
         "userInvocable": true
@@ -85,6 +91,7 @@
       "bucket": "engineering",
       "dir": "engineering/tdd",
       "description": "Test-driven development. Use when the user wants to build features or fix bugs test-first, mentions \"red-green-refactor\", or wants integration tests.",
+      "descriptionZh": "测试驱动开发。用户想先写测试再实现功能或修 bug、提到「red-green-refactor」，或需要集成测试时使用。",
       "invocation": {
         "modelInvocable": true,
         "userInvocable": true
@@ -96,6 +103,7 @@
       "bucket": "engineering",
       "dir": "engineering/to-spec",
       "description": "Turn the current conversation into a spec and publish it to the project issue tracker: no interview, just synthesis of what you've already discussed.",
+      "descriptionZh": "把当前对话整理成规格并发布到项目 issue 跟踪器：不再访谈，只综合已经讨论过的内容。",
       "invocation": {
         "modelInvocable": true,
         "userInvocable": true
@@ -107,6 +115,7 @@
       "bucket": "engineering",
       "dir": "engineering/to-tickets",
       "description": "Break a plan, spec, or the current conversation into a set of tracer-bullet tickets, each declaring its blocking edges, published to the configured tracker (edges as text in one file per ticket locally, or native blocking links on a real tracker).",
+      "descriptionZh": "把计划、规格或当前对话拆成一组曳光弹工单，每张声明自己的阻塞边，发布到已配置的跟踪器（本地每张工单一个文件、用文本写边；真实跟踪器用原生阻塞链接）。",
       "invocation": {
         "modelInvocable": true,
         "userInvocable": true
@@ -118,6 +127,7 @@
       "bucket": "engineering",
       "dir": "engineering/wayfinder",
       "description": "Plan a huge chunk of work (more than one agent session can hold) as a shared map of decision tickets on your issue tracker, and resolve them one at a time until the way to the destination is clear.",
+      "descriptionZh": "把超过单个 agent 会话容量的大块工作，规划成 issue 跟踪器上由决策工单组成的共享地图，逐个解决，直到通往目的地的路线清晰。",
       "invocation": {
         "modelInvocable": true,
         "userInvocable": true
@@ -129,6 +139,7 @@
       "bucket": "engineering",
       "dir": "engineering/implement",
       "description": "Implement a piece of work based on a spec or set of tickets.",
+      "descriptionZh": "根据规格或一组工单实现一项工作。",
       "invocation": {
         "modelInvocable": true,
         "userInvocable": true
@@ -140,6 +151,7 @@
       "bucket": "engineering",
       "dir": "engineering/implement-spec",
       "description": "Implement the result of /to-spec and /to-tickets in code.",
+      "descriptionZh": "把 /to-spec 与 /to-tickets 的产物落成代码。",
       "invocation": {
         "modelInvocable": true,
         "userInvocable": true
@@ -151,6 +163,7 @@
       "bucket": "engineering",
       "dir": "engineering/prototype",
       "description": "Build a throwaway prototype to answer a design question. Use when the user wants to sanity-check whether a state model or logic feels right, or explore what a UI should look like.",
+      "descriptionZh": "构建一次性原型来回答设计问题。用户想验证状态模型或逻辑是否顺手，或探索界面该长什么样时使用。",
       "invocation": {
         "modelInvocable": true,
         "userInvocable": true
@@ -162,6 +175,7 @@
       "bucket": "engineering",
       "dir": "engineering/research",
       "description": "Investigate a question against high-trust primary sources and capture the findings as a Markdown file in the repo. Use when the user wants a topic researched, docs or API facts gathered, or reading legwork delegated to a background agent.",
+      "descriptionZh": "对照高可信的一手资料调查一个问题，把结论写成仓库里的 Markdown 文件。用户想调研某个主题、收集文档或 API 事实，或把阅读杂活交给后台 agent 时使用。",
       "invocation": {
         "modelInvocable": true,
         "userInvocable": true
@@ -173,6 +187,7 @@
       "bucket": "engineering",
       "dir": "engineering/domain-modeling",
       "description": "Build and sharpen a project's domain model. Use when discussing codebase terminology, writing or editing a GLOSSARY.md, or recording or editing an ADR.",
+      "descriptionZh": "构建并打磨项目的领域模型。讨论代码库术语、编写或修改 GLOSSARY.md、记录或编辑 ADR 时使用。",
       "invocation": {
         "modelInvocable": true,
         "userInvocable": true
@@ -184,6 +199,7 @@
       "bucket": "engineering",
       "dir": "engineering/codebase-design",
       "description": "Shared vocabulary for designing deep modules. Use when the user wants to design or improve a module's interface, find deepening opportunities, decide where a seam goes, make code more testable or AI-navigable, or when another skill needs the deep-module vocabulary.",
+      "descriptionZh": "设计深模块的共享词汇。用户想设计或改进模块接口、寻找加深机会、决定接缝位置、让代码更易测试或更便于 AI 导航，或其他技能需要深模块词汇时使用。",
       "invocation": {
         "modelInvocable": true,
         "userInvocable": true
@@ -195,6 +211,7 @@
       "bucket": "engineering",
       "dir": "engineering/code-review",
       "description": "Review the changes since a fixed point (commit, branch, tag, or merge-base) along two axes: Standards (does the code follow this repo's documented coding standards?) and Spec (does the code match what the originating issue/spec asked for?). Runs both reviews in parallel sub-agents and reports them side by side. Use when the user wants to review a branch, a PR, work-in-progress changes, or asks to \"review since X\".",
+      "descriptionZh": "从固定点（commit、分支、tag 或 merge-base）起审查改动，分两条线：规范（代码是否遵循本仓库成文的编码规范？）与规格（代码是否符合原始 issue/规格的要求？）。两个审查在并行子 agent 中运行并并排汇报。用户想审查分支、PR、进行中的改动，或说「review since X」时使用。",
       "invocation": {
         "modelInvocable": true,
         "userInvocable": true
@@ -206,6 +223,7 @@
       "bucket": "engineering",
       "dir": "engineering/pr",
       "description": "Use when writing a PR body.",
+      "descriptionZh": "编写 PR 正文时使用。",
       "invocation": {
         "modelInvocable": true,
         "userInvocable": true
@@ -217,6 +235,7 @@
       "bucket": "engineering",
       "dir": "engineering/retro",
       "description": "Conduct a retrospective on a coding session.",
+      "descriptionZh": "对一次编码会话做复盘。",
       "invocation": {
         "modelInvocable": true,
         "userInvocable": true
@@ -228,6 +247,7 @@
       "bucket": "engineering",
       "dir": "engineering/wizard",
       "description": "Generate an interactive bash wizard that walks a human through steps only they can perform. Use when provisioning infrastructure, setting up credentials or CI secrets, walking an unfamiliar third-party dashboard, or running a one-off migration or cutover. Don't invoke this for steps the agent can perform itself.",
+      "descriptionZh": "生成交互式 bash 向导，带人走完只有本人能做的步骤。配置基础设施、设置凭据或 CI 密钥、操作陌生的第三方控制台，或执行一次性迁移或切换时使用。agent 自己能做的步骤不要用它。",
       "invocation": {
         "modelInvocable": true,
         "userInvocable": true
@@ -239,6 +259,7 @@
       "bucket": "productivity",
       "dir": "productivity/grill-me",
       "description": "A relentless interview to sharpen a plan or design.",
+      "descriptionZh": "用穷追不舍的访谈打磨方案或设计。",
       "invocation": {
         "modelInvocable": true,
         "userInvocable": true
@@ -250,6 +271,7 @@
       "bucket": "productivity",
       "dir": "productivity/grilling",
       "description": "Grill the user relentlessly about a plan, decision, or idea. Use when the user wants to stress-test their thinking, or uses any 'grill' trigger phrases.",
+      "descriptionZh": "围绕计划、决策或想法对用户穷追猛问。用户想压力测试自己的思路，或说出带「grill」的触发语时使用。",
       "invocation": {
         "modelInvocable": true,
         "userInvocable": true
@@ -261,6 +283,7 @@
       "bucket": "productivity",
       "dir": "productivity/handoff",
       "description": "Compact the current conversation into a handoff document for another agent to pick up.",
+      "descriptionZh": "把当前对话压缩成交接文档，供另一个 agent 接手。",
       "invocation": {
         "modelInvocable": true,
         "userInvocable": true
@@ -273,6 +296,7 @@
       "bucket": "productivity",
       "dir": "productivity/teach",
       "description": "Teach the user a new skill or concept, within this workspace.",
+      "descriptionZh": "在本工作区内教用户一项新技能或新概念。",
       "invocation": {
         "modelInvocable": true,
         "userInvocable": true
@@ -285,6 +309,7 @@
       "bucket": "productivity",
       "dir": "productivity/to-questionnaire",
       "description": "Turn a decision you can't fully answer into a questionnaire for someone else to fill in.",
+      "descriptionZh": "把你无法完全回答的决策变成问卷，交给别人填写。",
       "invocation": {
         "modelInvocable": true,
         "userInvocable": true
@@ -296,6 +321,7 @@
       "bucket": "productivity",
       "dir": "productivity/wait-what",
       "description": "Stop. That last message did not land: re-pitch it.",
+      "descriptionZh": "停。上一条没讲明白：换个说法重新讲。",
       "invocation": {
         "modelInvocable": true,
         "userInvocable": true
@@ -307,6 +333,7 @@
       "bucket": "productivity",
       "dir": "productivity/writing-for-agents",
       "description": "Writing documents for agents. Use when creating or editing skills, or modifying AGENTS.md or CLAUDE.md.",
+      "descriptionZh": "写给 agent 看的文档。创建或编辑技能，或修改 AGENTS.md、CLAUDE.md 时使用。",
       "invocation": {
         "modelInvocable": true,
         "userInvocable": true

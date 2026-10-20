@@ -9,6 +9,7 @@ const here = dirname(fileURLToPath(import.meta.url))
 const root = join(here, '..')
 const skillsRoot = join(root, 'skills')
 const manifestPath = join(skillsRoot, 'index.json')
+const i18nPath = join(root, 'i18n', 'zh.json')
 
 const BUCKETS = ['engineering', 'productivity']
 const NAME_RE = /^[a-z0-9]+(?:-[a-z0-9]+)*$/
@@ -65,6 +66,31 @@ function collect() {
   return entries
 }
 
+function loadDescriptions() {
+  let parsed
+  try {
+    parsed = JSON.parse(readFileSync(i18nPath, 'utf8'))
+  } catch (error) {
+    throw new Error(`${i18nPath}: ${error instanceof Error ? error.message : String(error)}`)
+  }
+  const skills = parsed?.skills
+  if (skills === null || typeof skills !== 'object' || Array.isArray(skills)) {
+    throw new Error(`${i18nPath}: "skills" must be an object keyed by skill name`)
+  }
+  return skills
+}
+
+function requireDescriptions(entries, descriptions) {
+  const names = new Set(entries.map((entry) => entry.name))
+  const missing = entries
+    .filter((entry) => typeof descriptions[entry.name] !== 'string' || descriptions[entry.name].trim() === '')
+    .map((entry) => entry.name)
+  const unknown = Object.keys(descriptions).filter((name) => !names.has(name))
+  if (missing.length > 0) throw new Error(`${i18nPath}: missing Chinese description for: ${missing.join(', ')}`)
+  if (unknown.length > 0) throw new Error(`${i18nPath}: entries for skills that do not ship: ${unknown.join(', ')}`)
+  return new Map(entries.map((entry) => [entry.name, descriptions[entry.name].trim()]))
+}
+
 const previous = existsSync(manifestPath) ? JSON.parse(readFileSync(manifestPath, 'utf8')) : undefined
 const collected = collect()
 if (collected.length === 0) throw new Error('no skills found')
@@ -77,6 +103,18 @@ collected.sort((left, right) => {
   return a - b || left.name.localeCompare(right.name)
 })
 
+const descriptions = requireDescriptions(collected, loadDescriptions())
+const skills = collected.map((entry) => ({
+  name: entry.name,
+  bucket: entry.bucket,
+  dir: entry.dir,
+  description: entry.description,
+  descriptionZh: descriptions.get(entry.name),
+  invocation: entry.invocation,
+  upstreamModelInvocable: entry.upstreamModelInvocable,
+  ...(entry.argumentHint ? { argumentHint: entry.argumentHint } : {}),
+}))
+
 const manifest = {
   name: JSON.parse(readFileSync(join(root ?? here, 'package.json'), 'utf8')).name,
   upstream: previous?.upstream ?? {
@@ -88,8 +126,8 @@ const manifest = {
     userInvocable: true,
     note: 'All shipped skills are both model- and user-invocable; upstream disable-model-invocation is recorded in upstreamModelInvocable.',
   },
-  count: collected.length,
-  skills: collected,
+  count: skills.length,
+  skills,
 }
 
 writeFileSync(manifestPath, `${JSON.stringify(manifest, null, 2)}\n`)
