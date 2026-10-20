@@ -2,7 +2,7 @@
 
 Matt Pocock's agent skills, packaged for [DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness).
 
-This bundle ships the 27 skills that upstream [mattpocock/skills](https://github.com/mattpocock/skills) promotes in its own plugin manifest (`skills/engineering` and `skills/productivity`), keeps every skill body and companion resource file intact, and registers them in the Harness skill registry under one provider named `mattpocock-skills`.
+This bundle ships the 27 skills that upstream [mattpocock/skills](https://github.com/mattpocock/skills) promotes in its own plugin manifest (`skills/engineering` and `skills/productivity`), keeps every skill body and companion resource file intact, and registers them in the Harness skill registry under one provider named `mattpocock-skills`. Skill descriptions in the `/` menu and in the model's skill catalog are Chinese; every skill body stays in its upstream English.
 
 ## What it registers
 
@@ -53,23 +53,25 @@ Upstream marks user-invoked skills with `disable-model-invocation: true`. This p
 | `wait-what` | user |
 | `writing-for-agents` | model |
 
-Full descriptions live in each `skills/<bucket>/<name>/SKILL.md` frontmatter and in `skills/index.json`.
+Full descriptions live in each `skills/<bucket>/<name>/SKILL.md` frontmatter and in `skills/index.json`; the Chinese text shown in the `/` menu and the skill catalog is stored in `i18n/zh.json` and carried in the manifest as `descriptionZh`.
 
 ## Install
 
-With the plugin manager tool, point `install_bundle` at this directory:
+The repository is public, so the bundle installs straight from its URL. No npm account and no release asset are involved.
+
+In the Web UI, open Settings, then Plugins, then Add plugin, and paste the repository URL:
 
 ```
-plugin_manager action=install_bundle target=<absolute path to dsh-mattpocock-skills-bundle>
+https://github.com/sceatcher3/dsh-mattpocock-skills
 ```
 
-After the first npm publish, it installs with the same command other plugins use:
+From a terminal, the same URL goes straight to the plugin command:
 
-```
-dsh plugin --profile web add dsh-mattpocock-skills-bundle
+```sh
+dsh plugin --profile web add https://github.com/sceatcher3/dsh-mattpocock-skills
 ```
 
-Or use the Web UI: Settings, Plugins, Add, then install from a local directory. The row appears as `dsh-mattpocock-skills`; enable it if the install leaves it off.
+The plugin manager reads `dsh.bundle.patch` from the repository, installs the package into the profile, and lists the row as `dsh-mattpocock-skills`; enable it if the install leaves it off.
 
 The skill catalog is rebuilt on the next agent step, so a bundle that activates cleanly shows its skills in the session's available-skills list and in the `/` menu without a restart.
 
@@ -84,41 +86,9 @@ Offline verification against the real `@deepseek-ai/dsh-skill` registry passes: 
 
 To remove it:
 
+```sh
+dsh plugin --profile web remove dsh-mattpocock-skills-bundle
 ```
-plugin_manager action=remove_bundle target=dsh-mattpocock-skills-bundle
-```
-
-### Install without npm
-
-A public repository can be installed from Git, with no registry account at all:
-
-```
-dsh plugin --profile web add git+https://github.com/sceatcher3/dsh-mattpocock-skills.git
-```
-
-Pin a tag for a reproducible version:
-
-```
-dsh plugin --profile web add git+https://github.com/sceatcher3/dsh-mattpocock-skills.git#v0.2.0
-```
-
-Or install a release tarball by URL:
-
-```
-dsh plugin --profile web add https://github.com/sceatcher3/dsh-mattpocock-skills/releases/download/v0.2.0/dsh-mattpocock-skills-bundle-0.2.0.tgz
-```
-
-Both paths need the repository to be reachable: public for everyone, or pnpm credentials configured for a private repository.
-
-### Install from GitHub
-
-The repository is public:
-
-```
-plugin_manager action=install_bundle target=git+https://github.com/sceatcher3/dsh-mattpocock-skills.git
-```
-
-The plugin manager runs pnpm against the repository, so the Git URL must be reachable from the machine that installs it. Private repositories need credentials configured for pnpm; a public repository is the simplest way for other people to install the bundle.
 
 ## Invoking a skill
 
@@ -135,6 +105,7 @@ dsh-mattpocock-skills-bundle/
   package.json             dsh.bundle.patch, exports, icon
   icon.svg                 package artwork
   locale/en.json, zh.json  display title and description
+  i18n/zh.json             Chinese skill descriptions for the / menu
   skills/index.json        generated skill manifest (27 entries)
   skills/engineering/...   upstream skill folders, verbatim
   skills/productivity/...  upstream skill folders, verbatim
@@ -170,7 +141,7 @@ UPSTREAM_COMMIT=$(git -C /tmp/mattpocock-skills rev-parse HEAD) \
   node tools/sync-from-checkout.mjs /tmp/mattpocock-skills
 ```
 
-The script reads the promoted skill list from the upstream `.claude-plugin/plugin.json`, copies those skill folders (minus `agents/`), and regenerates `skills/index.json`. To regenerate only the manifest from the folders already present, run `node tools/build-manifest.mjs` or `npm run manifest`.
+The script reads the promoted skill list from the upstream `.claude-plugin/plugin.json`, copies those skill folders (minus `agents/`), and regenerates `skills/index.json`. It reads `i18n/zh.json` before writing the manifest, so a newly promoted skill needs a Chinese description there; otherwise the script fails and names the missing skill. To regenerate only the manifest from the folders already present, run `node tools/build-manifest.mjs` or `npm run manifest`.
 
 Review the diff, confirm that `skills/index.json` lists the expected skills, then reinstall or restart the bundle.
 

@@ -1,67 +1,49 @@
 # Releasing
 
-The package is publish-ready: `private` is removed, `publishConfig.access` is `public`, and `npm pack` produces the complete bundle (64 files, 27 skills).
+The bundle ships through its public repository. Users install it by pasting the repository URL into DeepSeek Harness; there is no npm publish step and no release asset to upload.
 
-## 1. Publish to npm
+## 1. Regenerate the manifest
 
 ```sh
-npm login                      # or: export NPM_TOKEN=... and add //registry.npmjs.org/:_authToken=${NPM_TOKEN} to .npmrc
-npm publish --access public
-npm view dsh-mattpocock-skills-bundle version
+npm run manifest
 ```
 
-Publishing under a scope instead (for example `@sceatcher3/dsh-mattpocock-skills-bundle`) only needs the `name` field changed in `package.json`; `--access public` is still required.
+`tools/build-manifest.mjs` reads `i18n/zh.json` and stops if a shipped skill has no Chinese description or if the file names a skill that no longer ships. Commit the regenerated `skills/index.json` with the skill change.
 
-## 2. Verify the install path users will take
+## 2. Check and pack
+
+Run the development workspace validator, then pack:
 
 ```sh
-dsh plugin --profile web add dsh-mattpocock-skills-bundle
+node ../.build/validate.mjs
+npm pack --pack-destination ../.build
 ```
 
-The plugin manager installs the package, selects its `dsh.bundle.patch`, and the row appears as `dsh-mattpocock-skills-bundle`. Open `/tdd` in the composer or call `skill({ name: "tdd" })` to confirm.
+Install the packed tarball in a scratch profile and confirm all 27 skills load before tagging. The validator reports two executable-bit problems on the development workspace's FUSE mount; the Git index keeps mode `100755` on both shell helpers, so a fresh checkout is correct.
 
-## 3. Push the repository
+## 3. Version and push
+
+Bump `version` in `package.json`, update the version named in the workspace README, commit, then:
 
 ```sh
+git tag vX.Y.Z
 git push origin main --tags
 ```
 
-The repository is public, so the Git and release-tarball install paths need no credentials.
-
-## 4. Versioning
-
-Bump `version`, update `skills/index.json` if the skill set changed (`npm run manifest`), commit, then `git tag vX.Y.Z` and publish. Upstream resync uses `node tools/sync-from-checkout.mjs <upstream-checkout>`.
-
-## Alternative: GitHub Packages (no npmjs account)
-
-If npmjs registration is unavailable, publish the same tarball to GitHub Packages under a scoped name.
-
-1. Set `name` to `@sceatcher3/dsh-mattpocock-skills-bundle` and add `"publishConfig": { "registry": "https://npm.pkg.github.com" }`.
-2. Publish with a token that has `write:packages`:
+## 4. Verify the install path users take
 
 ```sh
-npm publish --registry=https://npm.pkg.github.com
+dsh plugin --profile web add https://github.com/sceatcher3/dsh-mattpocock-skills
 ```
 
-3. Installers need a `.npmrc` with their own GitHub token, because GitHub Packages requires authentication even for public packages:
-
-```
-@sceatcher3:registry=https://npm.pkg.github.com
-//npm.pkg.github.com/:_authToken=<their-token>
-```
+The plugin manager installs the repository, selects its `dsh.bundle.patch`, and the row appears as `dsh-mattpocock-skills`. Open `/tdd` in the composer or call `skill({ name: "tdd" })` to confirm. If the profile already has the bundle, remove it first:
 
 ```sh
-dsh plugin --profile web add @sceatcher3/dsh-mattpocock-skills-bundle
+dsh plugin --profile web remove dsh-mattpocock-skills-bundle
 ```
 
-This is the closest path to `add <name>`, at the cost of every installer needing a GitHub token.
+## Notes
 
-## Alternative: release tarball
-
-Upload the `npm pack` output as a GitHub Release asset and install it by URL:
-
-```sh
-dsh plugin --profile web add https://github.com/sceatcher3/dsh-mattpocock-skills/releases/download/v0.2.0/dsh-mattpocock-skills-bundle-0.2.0.tgz
-```
-
-No registry account is involved; the repository must be public.
+- npm publishing is not used. The package is not on the npm registry, and the install documentation points only at the repository URL.
+- `node tools/sync-from-checkout.mjs <upstream-checkout>` re-syncs skill folders and records the upstream commit; review the diff before tagging.
+- The repository is public, so installs need no credentials.
